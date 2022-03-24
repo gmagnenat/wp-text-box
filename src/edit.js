@@ -16,8 +16,16 @@ import {
 	useBlockProps,
 	RichText,
 	BlockControls,
+	InspectorControls,
 	AlignmentToolbar,
 } from '@wordpress/block-editor';
+
+import {
+	PanelBody,
+	TextControl,
+	TextareaControl,
+	ToggleControl,
+} from '@wordpress/components';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -39,7 +47,7 @@ import './editor.scss';
  * @return {WPElement} Element to render.
  */
 export default function Edit({ attributes, setAttributes }) {
-	const { text, alignment } = attributes;
+	const { text, alignment, checked } = attributes;
 
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({ alignment: newAlignment });
@@ -48,8 +56,41 @@ export default function Edit({ attributes, setAttributes }) {
 	const onChangeText = (newText) => {
 		setAttributes({ text: newText });
 	};
+
+	const onChangeToggle = (newCheck) => {
+		if (checked === true) {
+			setAttributes({ checked: newCheck });
+		} else {
+			setAttributes({ checked: newCheck });
+		}
+	};
 	return (
 		<>
+			<InspectorControls>
+				<PanelBody
+					title={__('Color Settings', 'text-box')}
+					icon="admin-appearance"
+					initialOpen
+				>
+					<TextControl
+						label="Input Label"
+						value={text}
+						onChange={onChangeText}
+						helo="help"
+					/>
+					<TextareaControl
+						label="Text Area Label"
+						value={text}
+						onChange={onChangeText}
+						helo="help"
+					/>
+					<ToggleControl
+						label="Toggle Label"
+						checked={checked}
+						onChange={onChangeToggle}
+					/>
+				</PanelBody>
+			</InspectorControls>
 			<BlockControls
 				controls={[
 					{
