@@ -18,17 +18,9 @@ import {
 	BlockControls,
 	InspectorControls,
 	AlignmentToolbar,
+	PanelColorSettings,
+	ContrastChecker,
 } from '@wordpress/block-editor';
-
-import {
-	PanelBody,
-	TextControl,
-	TextareaControl,
-	ToggleControl,
-	AnglePickerControl,
-	ColorPicker,
-	ColorPalette,
-} from '@wordpress/components';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -50,7 +42,7 @@ import './editor.scss';
  * @return {WPElement} Element to render.
  */
 export default function Edit({ attributes, setAttributes }) {
-	const { text, alignment, checked, angle, color } = attributes;
+	const { text, alignment, backgroundColor, textColor } = attributes;
 
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({ alignment: newAlignment });
@@ -60,68 +52,40 @@ export default function Edit({ attributes, setAttributes }) {
 		setAttributes({ text: newText });
 	};
 
-	const onChangeToggle = (newCheck) => {
-		if (checked === true) {
-			setAttributes({ checked: newCheck });
-		} else {
-			setAttributes({ checked: newCheck });
-		}
+	const onBackgroundColorChange = (newBgColor) => {
+		setAttributes({ backgroundColor: newBgColor });
 	};
 
-	const onChangeAngle = (newAngle) => {
-		setAttributes({ angle: newAngle });
-	};
-
-	const onChangeColor = (newColor) => {
-		setAttributes({ color: newColor });
+	const onTextColorChange = (newTextColor) => {
+		setAttributes({ textColor: newTextColor });
 	};
 
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody
+				<PanelColorSettings
 					title={__('Color Settings', 'text-box')}
 					icon="admin-appearance"
 					initialOpen
+					disableCustomColors={false}
+					colorSettings={[
+						{
+							value: backgroundColor,
+							onChange: onBackgroundColorChange,
+							label: __('Background Color', 'text-box'),
+						},
+						{
+							value: textColor,
+							onChange: onTextColorChange,
+							label: __('Text Color', 'text-box'),
+						},
+					]}
 				>
-					<TextControl
-						label="Input Label"
-						value={text}
-						onChange={onChangeText}
-						helo="help"
+					<ContrastChecker
+						textColor={textColor}
+						backgroundColor={backgroundColor}
 					/>
-					<TextareaControl
-						label="Text Area Label"
-						value={text}
-						onChange={onChangeText}
-						helo="help"
-					/>
-					<ToggleControl
-						label="Toggle Label"
-						checked={checked}
-						onChange={onChangeToggle}
-					/>
-					<AnglePickerControl
-						label="Angle Label"
-						value={angle}
-						onChange={onChangeAngle}
-					/>
-					<ColorPicker />
-					<ColorPalette
-						colors={[
-							{
-								name: 'red',
-								color: '#F00',
-							},
-							{
-								name: 'black',
-								color: '#000',
-							},
-						]}
-						value={color}
-						onChange={onChangeColor}
-					/>
-				</PanelBody>
+				</PanelColorSettings>
 			</InspectorControls>
 			<BlockControls
 				controls={[
@@ -148,6 +112,10 @@ export default function Edit({ attributes, setAttributes }) {
 			<RichText
 				{...useBlockProps({
 					className: `text-box-align-${alignment}`,
+					style: {
+						backgroundColor,
+						color: textColor,
+					},
 				})}
 				onChange={onChangeText}
 				value={text}

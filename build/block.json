@@ -25,17 +25,11 @@
 			"type": "string",
 			"default": "left"
 		},
-		"checked": {
-			"type": "boolean",
-			"default": true
+		"backgroundColor": {
+			"type": "string"
 		},
-		"angle": {
-			"type": "number",
-			"deffault": 0
-		},
-		"color": {
-			"type": "string",
-			"deffault": "#F00"
+		"textColor": {
+			"type": "string"
 		}
 	}
 }
