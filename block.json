@@ -14,12 +14,5 @@
 	"textdomain": "text-box",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css",
-	"attributes": {
-		"text": {
-			"type": "string",
-			"source": "html",
-			"selector": "h4"
-		}
-	}
+	"style": "file:./style-index.css"
 }

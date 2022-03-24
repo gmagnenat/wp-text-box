@@ -1,3 +1,4 @@
+/* eslint-disable jsdoc/check-line-alignment */
 /**
  * Retrieves the translation of text.
  *
@@ -11,7 +12,7 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/packages/packages-block-editor/#useBlockProps
  */
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, RichText } from '@wordpress/block-editor';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -25,14 +26,23 @@ import './editor.scss';
  * The edit function describes the structure of your block in the context of the
  * editor. This represents what the editor will render when the block is used.
  *
+ * @param {Object}  root0
+ * @param {Object}  root0.attributes
+ * @param {*} 		root0.setAttributes
  * @see https://developer.wordpress.org/block-editor/developers/block-api/block-edit-save/#edit
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit() {
+export default function Edit({ attributes, setAttributes }) {
+	const { text } = attributes;
 	return (
-		<p {...useBlockProps()}>
-			{__('Starter Bloc – hello from the editor!', 'starter-bloc')}
-		</p>
+		<RichText
+			{...useBlockProps()}
+			onChange={(value) => setAttributes({ text: value })}
+			value={text}
+			placeholder={__('Your Text', 'text-box')}
+			tagName="h4"
+			allowedFormats={['core/bold']}
+		/>
 	);
 }
