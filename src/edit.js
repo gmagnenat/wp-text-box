@@ -12,7 +12,17 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/packages/packages-block-editor/#useBlockProps
  */
-import { useBlockProps, RichText } from '@wordpress/block-editor';
+import {
+	useBlockProps,
+	RichText,
+	BlockControls,
+} from '@wordpress/block-editor';
+
+import {
+	ToolbarGroup,
+	ToolbarButton,
+	ToolbarDropdownMenu,
+} from '@wordpress/components';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -36,13 +46,70 @@ import './editor.scss';
 export default function Edit({ attributes, setAttributes }) {
 	const { text } = attributes;
 	return (
-		<RichText
-			{...useBlockProps()}
-			onChange={(value) => setAttributes({ text: value })}
-			value={text}
-			placeholder={__('Your Text', 'text-box')}
-			tagName="h4"
-			allowedFormats={['core/bold']}
-		/>
+		<>
+			<BlockControls
+				controls={[
+					{
+						title: 'Button 1',
+						icon: 'admin-generic',
+						isActive: false,
+						// onClick: () => console.log('Button 1 clicked'),
+					},
+					{
+						title: 'Button 2',
+						icon: 'admin-collapse',
+						isActive: true,
+						// onClick: () => console.log('Button 2 clicked'),
+					},
+				]}
+			>
+				<ToolbarGroup>
+					<ToolbarButton
+						title="Align Left"
+						icon="editor-alignleft"
+						// onClick={() => console.log('Align left')}
+					/>
+					<ToolbarButton
+						title="Align Center"
+						icon="editor-aligncenter"
+						// onClick={() => console.log('Align left')}
+					/>
+					<ToolbarButton
+						title="Align Right"
+						icon="editor-alignright"
+						// onClick={() => console.log('Align left')}
+					/>
+					<ToolbarDropdownMenu
+						icon="arrow-down-alt2"
+						label={__('More Alignments', 'text-box')}
+						controls={[
+							{
+								title: __('Wide', 'text-box'),
+								icon: 'align-wide',
+							},
+							{
+								title: __('Full', 'text-box'),
+								icon: 'align-full-width',
+							},
+						]}
+					/>
+				</ToolbarGroup>
+				<ToolbarGroup>
+					<ToolbarButton
+						title="Align Right"
+						icon="editor-alignright"
+						// onClick={() => console.log('Align left')}
+					/>
+				</ToolbarGroup>
+			</BlockControls>
+			<RichText
+				{...useBlockProps()}
+				onChange={(value) => setAttributes({ text: value })}
+				value={text}
+				placeholder={__('Your Text', 'text-box')}
+				tagName="h4"
+				allowedFormats={[]}
+			/>
+		</>
 	);
 }
