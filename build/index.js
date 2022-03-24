@@ -70,7 +70,9 @@ function Edit(_ref) {
   const {
     text,
     alignment,
-    checked
+    checked,
+    angle,
+    color
   } = attributes;
 
   const onChangeAlignment = newAlignment => {
@@ -97,6 +99,18 @@ function Edit(_ref) {
     }
   };
 
+  const onChangeAngle = newAngle => {
+    setAttributes({
+      angle: newAngle
+    });
+  };
+
+  const onChangeColor = newColor => {
+    setAttributes({
+      color: newColor
+    });
+  };
+
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Color Settings', 'text-box'),
     icon: "admin-appearance",
@@ -115,6 +129,20 @@ function Edit(_ref) {
     label: "Toggle Label",
     checked: checked,
     onChange: onChangeToggle
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.AnglePickerControl, {
+    label: "Angle Label",
+    value: angle,
+    onChange: onChangeAngle
+  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPicker, null), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPalette, {
+    colors: [{
+      name: 'red',
+      color: '#F00'
+    }, {
+      name: 'black',
+      color: '#000'
+    }],
+    value: color,
+    onChange: onChangeColor
   }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.BlockControls, {
     controls: [{
       title: 'Button 1',

@@ -25,6 +25,9 @@ import {
 	TextControl,
 	TextareaControl,
 	ToggleControl,
+	AnglePickerControl,
+	ColorPicker,
+	ColorPalette,
 } from '@wordpress/components';
 
 /**
@@ -47,7 +50,7 @@ import './editor.scss';
  * @return {WPElement} Element to render.
  */
 export default function Edit({ attributes, setAttributes }) {
-	const { text, alignment, checked } = attributes;
+	const { text, alignment, checked, angle, color } = attributes;
 
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({ alignment: newAlignment });
@@ -64,6 +67,15 @@ export default function Edit({ attributes, setAttributes }) {
 			setAttributes({ checked: newCheck });
 		}
 	};
+
+	const onChangeAngle = (newAngle) => {
+		setAttributes({ angle: newAngle });
+	};
+
+	const onChangeColor = (newColor) => {
+		setAttributes({ color: newColor });
+	};
+
 	return (
 		<>
 			<InspectorControls>
@@ -88,6 +100,26 @@ export default function Edit({ attributes, setAttributes }) {
 						label="Toggle Label"
 						checked={checked}
 						onChange={onChangeToggle}
+					/>
+					<AnglePickerControl
+						label="Angle Label"
+						value={angle}
+						onChange={onChangeAngle}
+					/>
+					<ColorPicker />
+					<ColorPalette
+						colors={[
+							{
+								name: 'red',
+								color: '#F00',
+							},
+							{
+								name: 'black',
+								color: '#000',
+							},
+						]}
+						value={color}
+						onChange={onChangeColor}
 					/>
 				</PanelBody>
 			</InspectorControls>

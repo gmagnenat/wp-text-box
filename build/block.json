@@ -28,6 +28,14 @@
 		"checked": {
 			"type": "boolean",
 			"default": true
+		},
+		"angle": {
+			"type": "number",
+			"deffault": 0
+		},
+		"color": {
+			"type": "string",
+			"deffault": "#F00"
 		}
 	}
 }
