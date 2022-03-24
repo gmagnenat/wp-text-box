@@ -12,7 +12,7 @@
 		"lint:js": "wp-scripts lint-js",
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
-		"start": "wp-scripts start",
+		"start": "NODE_ENV=development wp-scripts start",
 		"prepare": "husky install"
 	},
 	"prettier": "@wordpress/prettier-config",
