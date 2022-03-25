@@ -20,6 +20,17 @@
 			"padding": true
 		}
 	},
+	"styles": [
+		{
+			"name": "squared",
+			"label": "Squared",
+			"isDefault": true
+		},
+		{
+			"name": "rounded",
+			"label": "Rounded"
+		}
+	],
 	"textdomain": "text-box-a",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
@@ -33,6 +44,14 @@
 		"alignment": {
 			"type": "string",
 			"default": "left"
+		},
+		"shadow": {
+			"type": "boolean",
+			"default": false
+		},
+		"shadowOpacity": {
+			"type": "number",
+			"default": 30
 		},
 		"backgroundColor": {
 			"type": "string"

@@ -17,10 +17,16 @@ import {
 	RichText,
 	BlockControls,
 	AlignmentToolbar,
+	InspectorControls,
 } from '@wordpress/block-editor';
 
-// eslint-disable-next-line
-import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
+import {
+	// eslint-disable-next-line
+	__experimentalBoxControl as BoxControl,
+	PanelBody,
+	RangeControl,
+} from '@wordpress/components';
+import classnames from 'classnames';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -44,7 +50,7 @@ const { __Visualizer: BoxControlVisualizer } = BoxControl;
 export default function Edit(props) {
 	const { attributes, setAttributes } = props;
 
-	const { text, alignment, style } = attributes;
+	const { text, alignment, style, shadow, shadowOpacity } = attributes;
 
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({ alignment: newAlignment });
@@ -54,9 +60,45 @@ export default function Edit(props) {
 		setAttributes({ text: newText });
 	};
 
+	const toggleShadow = () => {
+		setAttributes({ shadow: !shadow });
+	};
+
+	const onChangeShadowOpacity = (newShadowOpacity) => {
+		setAttributes({ shadowOpacity: newShadowOpacity });
+	};
+
+	const classes = classnames(`text-box-align-${alignment}`, {
+		'has-shadow': shadow,
+		[`shadow-opacity-${shadowOpacity}`]: shadow && shadowOpacity,
+	});
+
 	return (
 		<>
-			<BlockControls>
+			<InspectorControls>
+				{shadow && (
+					<PanelBody title={__('Shadow Setting', 'text-box-a')}>
+						<RangeControl
+							label={__('Shadow Opacity', 'text-box-a')}
+							value={shadowOpacity}
+							min={10}
+							max={40}
+							step={10}
+							onChange={onChangeShadowOpacity}
+						/>
+					</PanelBody>
+				)}
+			</InspectorControls>
+			<BlockControls
+				controls={[
+					{
+						icon: 'admin-page',
+						title: __('Shadow', 'text-box-a'),
+						onClick: toggleShadow,
+						isActive: shadow,
+					},
+				]}
+			>
 				<AlignmentToolbar
 					value={alignment}
 					onChange={onChangeAlignment}
@@ -64,7 +106,7 @@ export default function Edit(props) {
 			</BlockControls>
 			<div
 				{...useBlockProps({
-					className: `text-box-align-${alignment}`,
+					className: classes,
 				})}
 			>
 				<RichText
