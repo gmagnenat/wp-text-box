@@ -45,7 +45,7 @@ export default function save({ attributes }) {
 		backgroundColor
 	);
 
-	const textClass = getColorClassName('text-color', textColor);
+	const textClass = getColorClassName('color', textColor);
 
 	const classes = classnames(`text-box-align-${alignment}`, {
 		[textClass]: textClass,

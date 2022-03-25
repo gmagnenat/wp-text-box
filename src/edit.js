@@ -21,7 +21,10 @@ import {
 	PanelColorSettings,
 	ContrastChecker,
 	withColors,
+	getColorClassName,
 } from '@wordpress/block-editor';
+
+import classnames from 'classnames';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -49,7 +52,21 @@ function Edit(props) {
 		backgroundColor,
 		textColor,
 	} = props;
-	const { text, alignment } = attributes;
+
+	const { text, alignment, customBackgroundColor, customTextColor } =
+		attributes;
+
+	const backgroundClass = getColorClassName(
+		'background-color',
+		backgroundColor.slug
+	);
+
+	const textClass = getColorClassName('color', textColor.slug);
+
+	const classes = classnames(`text-box-align-${alignment}`, {
+		[textClass]: textClass,
+		[backgroundClass]: backgroundClass,
+	});
 
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({ alignment: newAlignment });
@@ -81,8 +98,8 @@ function Edit(props) {
 					]}
 				>
 					<ContrastChecker
-						textColor={textColor}
-						backgroundColor={backgroundColor}
+						textColor={textColor.color}
+						backgroundColor={backgroundColor.color}
 					/>
 				</PanelColorSettings>
 			</InspectorControls>
@@ -108,10 +125,12 @@ function Edit(props) {
 			</BlockControls>
 			<RichText
 				{...useBlockProps({
-					className: `text-box-align-${alignment}`,
+					className: classes,
 					style: {
-						backgroundColor: backgroundColor.color,
-						color: textColor.color,
+						backgroundColor: backgroundClass
+							? undefined
+							: customBackgroundColor,
+						color: textClass ? undefined : customTextColor,
 					},
 				})}
 				onChange={onChangeText}
