@@ -20,6 +20,7 @@ import {
 	AlignmentToolbar,
 	PanelColorSettings,
 	ContrastChecker,
+	withColors,
 } from '@wordpress/block-editor';
 
 /**
@@ -34,15 +35,21 @@ import './editor.scss';
  * The edit function describes the structure of your block in the context of the
  * editor. This represents what the editor will render when the block is used.
  *
- * @param {Object}  root0
- * @param {Object}  root0.attributes
- * @param {*} 		root0.setAttributes
+ * @param {any}  props
  * @see https://developer.wordpress.org/block-editor/developers/block-api/block-edit-save/#edit
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit({ attributes, setAttributes }) {
-	const { text, alignment, backgroundColor, textColor } = attributes;
+function Edit(props) {
+	const {
+		attributes,
+		setAttributes,
+		setBackgroundColor,
+		setTextColor,
+		backgroundColor,
+		textColor,
+	} = props;
+	const { text, alignment } = attributes;
 
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({ alignment: newAlignment });
@@ -50,14 +57,6 @@ export default function Edit({ attributes, setAttributes }) {
 
 	const onChangeText = (newText) => {
 		setAttributes({ text: newText });
-	};
-
-	const onBackgroundColorChange = (newBgColor) => {
-		setAttributes({ backgroundColor: newBgColor });
-	};
-
-	const onTextColorChange = (newTextColor) => {
-		setAttributes({ textColor: newTextColor });
 	};
 
 	return (
@@ -70,13 +69,13 @@ export default function Edit({ attributes, setAttributes }) {
 					disableCustomColors={false}
 					colorSettings={[
 						{
-							value: backgroundColor,
-							onChange: onBackgroundColorChange,
+							value: backgroundColor.color,
+							onChange: setBackgroundColor,
 							label: __('Background Color', 'text-box'),
 						},
 						{
-							value: textColor,
-							onChange: onTextColorChange,
+							value: textColor.color,
+							onChange: setTextColor,
 							label: __('Text Color', 'text-box'),
 						},
 					]}
@@ -93,13 +92,11 @@ export default function Edit({ attributes, setAttributes }) {
 						title: 'Button 1',
 						icon: 'admin-generic',
 						isActive: false,
-						// onClick: () => console.log('Button 1 clicked'),
 					},
 					{
 						title: 'Button 2',
 						icon: 'admin-collapse',
 						isActive: true,
-						// onClick: () => console.log('Button 2 clicked'),
 					},
 				]}
 			></BlockControls>
@@ -113,8 +110,8 @@ export default function Edit({ attributes, setAttributes }) {
 				{...useBlockProps({
 					className: `text-box-align-${alignment}`,
 					style: {
-						backgroundColor,
-						color: textColor,
+						backgroundColor: backgroundColor.color,
+						color: textColor.color,
 					},
 				})}
 				onChange={onChangeText}
@@ -126,3 +123,8 @@ export default function Edit({ attributes, setAttributes }) {
 		</>
 	);
 }
+
+export default withColors({
+	backgroundColor: 'backgroundColor',
+	textColor: 'color',
+})(Edit);
