@@ -19,6 +19,9 @@ import {
 	AlignmentToolbar,
 } from '@wordpress/block-editor';
 
+// eslint-disable-next-line
+import { __experimentalBoxControl as BoxControl } from '@wordpress/components';
+
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
  * Those files can contain any CSS code that gets applied to the editor.
@@ -26,6 +29,8 @@ import {
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
 import './editor.scss';
+
+const { __Visualizer: BoxControlVisualizer } = BoxControl;
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -39,7 +44,7 @@ import './editor.scss';
 export default function Edit(props) {
 	const { attributes, setAttributes } = props;
 
-	const { text, alignment } = attributes;
+	const { text, alignment, style } = attributes;
 
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({ alignment: newAlignment });
@@ -57,16 +62,26 @@ export default function Edit(props) {
 					onChange={onChangeAlignment}
 				/>
 			</BlockControls>
-			<RichText
+			<div
 				{...useBlockProps({
 					className: `text-box-align-${alignment}`,
 				})}
-				onChange={onChangeText}
-				value={text}
-				placeholder={__('Your Text', 'text-box-a')}
-				tagName="h4"
-				allowedFormats={[]}
-			/>
+			>
+				<RichText
+					className="text-box-title"
+					onChange={onChangeText}
+					value={text}
+					placeholder={__('Your Text', 'text-box-a')}
+					tagName="h4"
+					allowedFormats={[]}
+				/>
+				<BoxControlVisualizer
+					values={style && style.spacing && style.spacing.padding}
+					showValues={
+						style && style.visualizers && style.visualizers.padding
+					}
+				/>
+			</div>
 		</>
 	);
 }
