@@ -21,6 +21,7 @@
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/writing-your-first-block-type/
  */
 function blocks_learning_text_box_block_init() {
-	register_block_type( __DIR__ . '/build' );
+	register_block_type( __DIR__ . '/build/block_a' );
+	register_block_type( __DIR__ . '/build/block_b' );
 }
 add_action( 'init', 'blocks_learning_text_box_block_init' );

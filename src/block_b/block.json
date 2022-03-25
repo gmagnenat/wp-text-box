@@ -1,9 +1,9 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "blocks-learning/text-box",
+	"name": "blocks-learning/text-box-b",
 	"version": "0.1.0",
-	"title": "Text box",
+	"title": "Text box B",
 	"category": "text",
 	"icon": "text-page",
 	"description": "A box of text.",
@@ -16,7 +16,7 @@
 			"gradients": true
 		}
 	},
-	"textdomain": "text-box",
+	"textdomain": "text-box-b",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",

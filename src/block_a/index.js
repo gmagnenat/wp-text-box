@@ -25,7 +25,7 @@ import save from './save';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-registerBlockType('blocks-learning/text-box', {
+registerBlockType('blocks-learning/text-box-a', {
 	/**
 	 * @see ./edit.js
 	 */
