@@ -12,7 +12,8 @@
 		"html": false,
 		"color": {
 			"background": true,
-			"text": true
+			"text": true,
+			"gradients": true
 		}
 	},
 	"textdomain": "text-box",
@@ -30,18 +31,15 @@
 			"default": "left"
 		},
 		"backgroundColor": {
-			"type": "string",
-			"default": "strong-magenta"
+			"type": "string"
 		},
 		"textColor": {
 			"type": "string",
 			"default": "very-light-gray"
 		},
-		"customBackgroundColor": {
-			"type": "string"
-		},
-		"customTextColor": {
-			"type": "string"
+		"gradient": {
+			"type": "string",
+			"default": "green-to-yellow"
 		}
 	}
 }

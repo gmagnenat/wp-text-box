@@ -9,6 +9,9 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": function() { return /* binding */ Edit; }
+/* harmony export */ });
 /* harmony import */ var _babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
@@ -16,9 +19,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/editor.scss");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./editor.scss */ "./src/editor.scss");
 
 
 
@@ -36,7 +37,6 @@ __webpack_require__.r(__webpack_exports__);
  *
  * @see https://developer.wordpress.org/block-editor/packages/packages-block-editor/#useBlockProps
  */
-
 
 
 /**
@@ -60,24 +60,12 @@ __webpack_require__.r(__webpack_exports__);
 function Edit(props) {
   const {
     attributes,
-    setAttributes,
-    setBackgroundColor,
-    setTextColor,
-    backgroundColor,
-    textColor
+    setAttributes
   } = props;
   const {
     text,
-    alignment,
-    customBackgroundColor,
-    customTextColor
+    alignment
   } = attributes;
-  const backgroundClass = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.getColorClassName)('background-color', backgroundColor.slug);
-  const textClass = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.getColorClassName)('color', textColor.slug);
-  const classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(`text-box-align-${alignment}`, {
-    [textClass]: textClass,
-    [backgroundClass]: backgroundClass
-  });
 
   const onChangeAlignment = newAlignment => {
     setAttributes({
@@ -91,42 +79,11 @@ function Edit(props) {
     });
   };
 
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.PanelColorSettings, {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Color Settings', 'text-box'),
-    icon: "admin-appearance",
-    initialOpen: true,
-    disableCustomColors: false,
-    colorSettings: [{
-      value: backgroundColor.color,
-      onChange: setBackgroundColor,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Background Color', 'text-box')
-    }, {
-      value: textColor.color,
-      onChange: setTextColor,
-      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Text Color', 'text-box')
-    }]
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.ContrastChecker, {
-    textColor: textColor.color,
-    backgroundColor: backgroundColor.color
-  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.BlockControls, {
-    controls: [{
-      title: 'Button 1',
-      icon: 'admin-generic',
-      isActive: false
-    }, {
-      title: 'Button 2',
-      icon: 'admin-collapse',
-      isActive: true
-    }]
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.AlignmentToolbar, {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.BlockControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.AlignmentToolbar, {
     value: alignment,
     onChange: onChangeAlignment
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.RichText, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)({
-    className: classes,
-    style: {
-      backgroundColor: backgroundClass ? undefined : customBackgroundColor,
-      color: textClass ? undefined : customTextColor
-    }
+    className: `text-box-align-${alignment}`
   }), {
     onChange: onChangeText,
     value: text,
@@ -135,11 +92,6 @@ function Edit(props) {
     allowedFormats: []
   })));
 }
-
-/* harmony default export */ __webpack_exports__["default"] = ((0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.withColors)({
-  backgroundColor: 'backgroundColor',
-  textColor: 'color'
-})(Edit));
 
 /***/ }),
 
@@ -251,24 +203,11 @@ function save(_ref) {
   } = _ref;
   const {
     text,
-    alignment,
-    backgroundColor,
-    textColor,
-    customBackgroundColor,
-    customTextColor
+    alignment
   } = attributes;
-  const backgroundClass = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.getColorClassName)('background-color', backgroundColor);
-  const textClass = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.getColorClassName)('color', textColor);
-  const classes = classnames__WEBPACK_IMPORTED_MODULE_3___default()(`text-box-align-${alignment}`, {
-    [textClass]: textClass,
-    [backgroundClass]: backgroundClass
-  });
+  const classes = classnames__WEBPACK_IMPORTED_MODULE_3___default()(`text-box-align-${alignment}`);
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText.Content, (0,_babel_runtime_helpers_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps.save({
-    className: classes,
-    style: {
-      backgroundColor: backgroundClass ? undefined : customBackgroundColor,
-      color: textClass ? undefined : customTextColor
-    }
+    className: classes
   }), {
     tagName: "h4",
     value: text

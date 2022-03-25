@@ -16,15 +16,8 @@ import {
 	useBlockProps,
 	RichText,
 	BlockControls,
-	InspectorControls,
 	AlignmentToolbar,
-	PanelColorSettings,
-	ContrastChecker,
-	withColors,
-	getColorClassName,
 } from '@wordpress/block-editor';
-
-import classnames from 'classnames';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -43,30 +36,10 @@ import './editor.scss';
  *
  * @return {WPElement} Element to render.
  */
-function Edit(props) {
-	const {
-		attributes,
-		setAttributes,
-		setBackgroundColor,
-		setTextColor,
-		backgroundColor,
-		textColor,
-	} = props;
+export default function Edit(props) {
+	const { attributes, setAttributes } = props;
 
-	const { text, alignment, customBackgroundColor, customTextColor } =
-		attributes;
-
-	const backgroundClass = getColorClassName(
-		'background-color',
-		backgroundColor.slug
-	);
-
-	const textClass = getColorClassName('color', textColor.slug);
-
-	const classes = classnames(`text-box-align-${alignment}`, {
-		[textClass]: textClass,
-		[backgroundClass]: backgroundClass,
-	});
+	const { text, alignment } = attributes;
 
 	const onChangeAlignment = (newAlignment) => {
 		setAttributes({ alignment: newAlignment });
@@ -78,45 +51,6 @@ function Edit(props) {
 
 	return (
 		<>
-			<InspectorControls>
-				<PanelColorSettings
-					title={__('Color Settings', 'text-box')}
-					icon="admin-appearance"
-					initialOpen
-					disableCustomColors={false}
-					colorSettings={[
-						{
-							value: backgroundColor.color,
-							onChange: setBackgroundColor,
-							label: __('Background Color', 'text-box'),
-						},
-						{
-							value: textColor.color,
-							onChange: setTextColor,
-							label: __('Text Color', 'text-box'),
-						},
-					]}
-				>
-					<ContrastChecker
-						textColor={textColor.color}
-						backgroundColor={backgroundColor.color}
-					/>
-				</PanelColorSettings>
-			</InspectorControls>
-			<BlockControls
-				controls={[
-					{
-						title: 'Button 1',
-						icon: 'admin-generic',
-						isActive: false,
-					},
-					{
-						title: 'Button 2',
-						icon: 'admin-collapse',
-						isActive: true,
-					},
-				]}
-			></BlockControls>
 			<BlockControls>
 				<AlignmentToolbar
 					value={alignment}
@@ -125,13 +59,7 @@ function Edit(props) {
 			</BlockControls>
 			<RichText
 				{...useBlockProps({
-					className: classes,
-					style: {
-						backgroundColor: backgroundClass
-							? undefined
-							: customBackgroundColor,
-						color: textClass ? undefined : customTextColor,
-					},
+					className: `text-box-align-${alignment}`,
 				})}
 				onChange={onChangeText}
 				value={text}
@@ -142,8 +70,3 @@ function Edit(props) {
 		</>
 	);
 }
-
-export default withColors({
-	backgroundColor: 'backgroundColor',
-	textColor: 'color',
-})(Edit);
