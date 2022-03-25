@@ -9,7 +9,11 @@
 	"description": "A box of text.",
 	"keywords": ["text", "paragraph", "box"],
 	"supports": {
-		"html": false
+		"html": false,
+		"color": {
+			"background": true,
+			"text": true
+		}
 	},
 	"textdomain": "text-box",
 	"editorScript": "file:./index.js",
@@ -26,10 +30,12 @@
 			"default": "left"
 		},
 		"backgroundColor": {
-			"type": "string"
+			"type": "string",
+			"default": "strong-magenta"
 		},
 		"textColor": {
-			"type": "string"
+			"type": "string",
+			"default": "very-light-gray"
 		},
 		"customBackgroundColor": {
 			"type": "string"

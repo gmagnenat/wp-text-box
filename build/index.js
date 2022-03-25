@@ -74,12 +74,10 @@ function Edit(props) {
   } = attributes;
   const backgroundClass = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.getColorClassName)('background-color', backgroundColor.slug);
   const textClass = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.getColorClassName)('color', textColor.slug);
-  console.log(backgroundClass, textClass);
   const classes = classnames__WEBPACK_IMPORTED_MODULE_4___default()(`text-box-align-${alignment}`, {
     [textClass]: textClass,
     [backgroundClass]: backgroundClass
   });
-  console.log(classes);
 
   const onChangeAlignment = newAlignment => {
     setAttributes({
