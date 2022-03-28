@@ -18,7 +18,9 @@
 		"spacing": {
 			"margin": true,
 			"padding": true
-		}
+		},
+		"align": true,
+		"achnor": true
 	},
 	"styles": [
 		{
@@ -31,6 +33,13 @@
 			"label": "Rounded"
 		}
 	],
+	"example": {
+		"attributes": {
+			"text": "This is some text!",
+			"gradient": "red-to-blue",
+			"shadow": true
+		}
+	},
 	"textdomain": "text-box-a",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
